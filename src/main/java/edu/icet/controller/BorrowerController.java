@@ -4,7 +4,10 @@ import edu.icet.dto.Borrower;
 import edu.icet.service.BorrowerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -19,4 +22,21 @@ public class BorrowerController {
         service.addBorrower(borrower);
     }
 
+
+    @GetMapping("/get")
+    public List<Borrower> getBorrowers(){
+        return service.getBorrowers();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteBorrower(@PathVariable Long id){
+        return (service.deleteBorrower(id)) ?
+                ResponseEntity.ok("Borrower Deleted Successfully...") :
+                ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("search/{id}")
+    public Borrower getBorrowerById(@PathVariable Long id){
+        return service.getBorrowerById(id);
+    }
 }
