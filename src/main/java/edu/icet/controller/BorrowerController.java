@@ -1,6 +1,7 @@
 package edu.icet.controller;
 
 import edu.icet.dto.Borrower;
+import edu.icet.entity.BorrowerEntity;
 import edu.icet.service.BorrowerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class BorrowerController {
 
 
     @GetMapping("/get")
-    public List<Borrower> getBorrowers(){
+    public List<BorrowerEntity> getBorrowers(){
         return service.getBorrowers();
     }
 
@@ -35,8 +36,14 @@ public class BorrowerController {
                 ResponseEntity.notFound().build();
     }
 
-    @GetMapping("search/{id}")
-    public Borrower getBorrowerById(@PathVariable Long id){
-        return service.getBorrowerById(id);
+    @GetMapping("search/{userName}")
+    public Borrower getBorrowerById(@PathVariable String userName){
+        return service.getBorrowerByUserName(userName);
     }
+
+    @GetMapping("/is-exist-user/{userName}")
+    public Boolean isExistsUser(@PathVariable String userName){
+        return service.isExistsUser(userName);
+    }
+
 }

@@ -10,16 +10,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BorrowerServiceImpl implements BorrowerService {
     final BorrowerRepository repository;
-      ModelMapper mapper;
+
+    ModelMapper mapper;
 
     @Bean
-    public ModelMapper setup(){
-        return new ModelMapper();
+    public void setup(){
+        this.mapper=new ModelMapper();
     }
+
     @Override
     public void addBorrower(Borrower borrower) {
         BorrowerEntity entity = mapper.map(borrower, BorrowerEntity.class);
@@ -27,17 +30,33 @@ public class BorrowerServiceImpl implements BorrowerService {
     }
 
     @Override
-    public List<Borrower> getBorrowers() {
-        return null;
+    public List<BorrowerEntity> getBorrowers() {
+        return (List<BorrowerEntity>) repository.findAll();
     }
 
     @Override
     public boolean deleteBorrower(Long id) {
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public Borrower getBorrowerById(Long id) {
+    public Borrower getBorrowerByUserName(String userName) {
+      return mapper.map(repository.findByuserName(userName),Borrower.class);
+    }
+
+    @Override
+    public Boolean isExistsUser(String userName) {
+        repository.existsByUserName(userName);
         return null;
     }
+
+//    @Override
+//    public Borrower getBorrowerById(Long id) {
+//        Optional<BorrowerEntity> byId = repository.findById(id);
+//        return mapper.map(byId, Borrower.class);
+//    }
 }

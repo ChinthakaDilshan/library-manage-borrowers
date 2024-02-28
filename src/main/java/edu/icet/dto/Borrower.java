@@ -8,13 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Borrower {
-    private Long id;
-    private String name;
-    private String contactNumber;
-    private String nic;
+    private String firstName;
+    private String lastName;
+    private String userName;
     private String email;
     private String address;
+    private String address2;
     private String country;
-    private String username;
-    private String password;
+    private String contactNumber;
 }
