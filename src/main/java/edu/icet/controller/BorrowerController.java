@@ -14,17 +14,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/borrower")
 @RequiredArgsConstructor
+
 public class BorrowerController {
     final BorrowerService service;
 
-    @PostMapping("/add")
+    @PostMapping("/add-borrower")
     @ResponseStatus(HttpStatus.CREATED)
     public void addBorrower(@RequestBody Borrower borrower){
         service.addBorrower(borrower);
     }
 
 
-    @GetMapping("/get")
+    @GetMapping("/get-all-borrowers")
     public List<BorrowerEntity> getBorrowers(){
         return service.getBorrowers();
     }
@@ -36,12 +37,12 @@ public class BorrowerController {
                 ResponseEntity.notFound().build();
     }
 
-    @GetMapping("search/{userName}")
+    @GetMapping("find-by-borrower-name/{userName}")
     public Borrower getBorrowerById(@PathVariable String userName){
         return service.getBorrowerByUserName(userName);
     }
 
-    @GetMapping("/is-exist-user/{userName}")
+    @GetMapping("/is-exist-borrower/{userName}")
     public Boolean isExistsUser(@PathVariable String userName){
         return service.isExistsUser(userName);
     }

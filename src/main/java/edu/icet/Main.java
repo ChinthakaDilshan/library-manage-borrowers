@@ -11,8 +11,5 @@ public class Main {
         SpringApplication.run(Main.class);
     }
 
-//    @Bean
-//    public ModelMapper setup(){
-//        return new ModelMapper();
-//    }
+
 }

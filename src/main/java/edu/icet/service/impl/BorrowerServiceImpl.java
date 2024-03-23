@@ -54,9 +54,5 @@ public class BorrowerServiceImpl implements BorrowerService {
         return null;
     }
 
-//    @Override
-//    public Borrower getBorrowerById(Long id) {
-//        Optional<BorrowerEntity> byId = repository.findById(id);
-//        return mapper.map(byId, Borrower.class);
-//    }
+
 }
